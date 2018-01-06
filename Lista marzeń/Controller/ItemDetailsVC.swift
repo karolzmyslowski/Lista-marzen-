@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var storePicker: UIPickerView!
     @IBOutlet weak var titleField: CustomTextField!
@@ -24,6 +24,21 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let store = Store(context: context)
+        store.name = "Allegro"
+        let store2 = Store(context: context)
+        store2.name = "eBay"
+        let store3 = Store(context: context)
+        store3.name = "OtoMoto"
+        let store4 = Store(context: context)
+        store4.name = "Media Markt"
+        
+        
+        
+        
+        
+        
+        
         if let topItem = self.navigationController?.navigationBar.topItem {
             topItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         }
@@ -33,13 +48,17 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         
         imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        
+        detailsField.delegate = self
+        priceField.delegate = self
+        titleField.delegate = self
         getStore()
         
         if itemToEdit != nil {
             loadItemData()
         }
-        
+    }
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         let store = stores[row]
@@ -138,11 +157,11 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         }
         imagePicker.dismiss(animated: true, completion: nil)
     }
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
-
-
-
 
 
 
