@@ -24,9 +24,9 @@
         <relationship name="toItem" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="toStore" inverseEntity="Item" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Item" positionX="115" positionY="-159" width="128" height="148"/>
         <element name="Image" positionX="160" positionY="225" width="128" height="88"/>
-        <element name="Store" positionX="-189" positionY="108" width="128" height="88"/>
+        <element name="Item" positionX="115" positionY="-159" width="128" height="148"/>
         <element name="ItemType" positionX="-144" positionY="-135" width="128" height="75"/>
+        <element name="Store" positionX="-189" positionY="108" width="128" height="88"/>
     </elements>
 </model>
