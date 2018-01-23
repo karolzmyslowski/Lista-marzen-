@@ -20,29 +20,13 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
     var stores = [Store]()
     var itemToEdit: Item?
     var imagePicker: UIImagePickerController!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let store = Store(context: context)
-        store.name = "Allegro"
-        let store2 = Store(context: context)
-        store2.name = "eBay"
-        let store3 = Store(context: context)
-        store3.name = "OtoMoto"
-        let store4 = Store(context: context)
-        store4.name = "Media Markt"
-        
-        
-        
-        
-        
-        
         
         if let topItem = self.navigationController?.navigationBar.topItem {
             topItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         }
-        
         storePicker.delegate = self
         storePicker.dataSource = self
         
@@ -51,8 +35,9 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         detailsField.delegate = self
         priceField.delegate = self
         titleField.delegate = self
+        testingDataToPickerContoller()
         getStore()
-        
+
         if itemToEdit != nil {
             loadItemData()
         }
@@ -161,6 +146,17 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         textField.resignFirstResponder()
         return true
     }
+    func testingDataToPickerContoller() {
+        let store = Store(context: context)
+        store.name = "Allegro"
+        let store2 = Store(context: context)
+        store2.name = "eBay"
+        let store3 = Store(context: context)
+        store3.name = "OtoMoto"
+        let store4 = Store(context: context)
+        store4.name = "Media Markt"
+    }
+    
 }
 
 
