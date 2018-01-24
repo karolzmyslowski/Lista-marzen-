@@ -17,9 +17,12 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
     @IBOutlet weak var detailsField: CustomTextField!
     @IBOutlet weak var itemImage: UIImageView!
     
+    
+    var controller : NSFetchedResultsController<Item>!
     var stores = [Store]()
     var itemToEdit: Item?
     var imagePicker: UIImagePickerController!
+    var countStore: Int!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,12 +38,16 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         detailsField.delegate = self
         priceField.delegate = self
         titleField.delegate = self
-        testingDataToPickerContoller()
+        ItemCount()
+        print(countStore)
+        if countStore == 0 {
+        generateTextData()
+        }
         getStore()
-
         if itemToEdit != nil {
             loadItemData()
         }
+
     }
     func dismissKeyboard() {
         view.endEditing(true)
@@ -146,7 +153,8 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         textField.resignFirstResponder()
         return true
     }
-    func testingDataToPickerContoller() {
+
+    func generateTextData() {
         let store = Store(context: context)
         store.name = "Allegro"
         let store2 = Store(context: context)
@@ -155,8 +163,18 @@ class ItemDetailsVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSou
         store3.name = "OtoMoto"
         let store4 = Store(context: context)
         store4.name = "Media Markt"
+        ad.saveContext()
+        }
+    func ItemCount(){
+        do{
+        let count :NSFetchRequest<Store> = Store.fetchRequest()
+        self.countStore = try context.count(for: count)
+        }
+        catch
+        {
+        //eror
+        }
     }
-    
 }
 
 
